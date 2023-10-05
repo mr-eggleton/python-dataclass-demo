@@ -19,18 +19,27 @@ class Position:
     return 2 * r * asin(sqrt(h))
 
 class Objective(Position):
-  name:     str = ""
+  description:     str = ""
+  url:     str = ""
+
+class ObjectiveProgress(Objective):
+  status:    str = ""
+  notes:     str = ""
+  planned_date:str = ""
+  date:str = ""
 
 @datafile("store/quests/{self.name}.json")
 class Quest():
-  features: List[Objective]
+  objectives: List[Objective]
   name:     str = ""
-  pass
   
-@datafile("store/progress/{self.name}.json")
+  
+@datafile("store/progress/{self.user}_{self.quest}.json")
 class Progress():
-  name:     str = ""
-  pass
+  user:     str = ""
+  quest:str = ""
+  objectives: List[ObjectiveProgress]
+  
 
   '''
   features: List[Feature] 
